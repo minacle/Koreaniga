@@ -1,0 +1,470 @@
+import Foundation
+%{
+from __future__ import unicode_literals
+from unicodedata import normalize
+initials = [
+    "g", "gg", "n", "d", "dd", "r", "m", "b", "bb", "s", "ss", "", "j", "jj",
+    "c", "k", "t", "p", "h",
+]
+medials = [
+    "a", "ae", "ya", "yae", "eo", "e", "yeo", "ye", "o", "wa", "wae", "oe",
+    "yo", "u", "weo", "we", "wi", "yu", "eu", "yi", "i",
+]
+finals = [
+    "g", "gg", "gs", "n", "nj", "nh", "d", "l", "lg", "lm", "lb", "ls", "lt",
+    "lp"," lh", "m", "b", "bs", "s", "ss", "ng", "j", "c", "k", "t", "p", "h",
+]
+initial_base = 0x1100
+medial_base = 0x1161
+final_base = 0x11a8
+initial_filler = 0x115f
+medial_filler = 0x1160
+final_filler = None
+def hangulise(romaji):
+    if romaji:
+        romaji = romaji[0].lower() + romaji[1:]
+    romaji_syllables = []
+    hangul_syllables = []
+    temp = ""
+    while len(romaji):
+        if romaji[0] >= "a" and romaji[0] <= "z":
+            temp += romaji[0]
+            romaji = romaji[1:]
+        elif romaji[0] >= "A" and romaji[0] <= "Z":
+            if temp:
+                romaji_syllables.append(temp)
+                temp = ""
+            romaji = romaji[0].lower() + romaji[1:]
+        else:
+            romaji = romaji[1:]
+    if temp:
+        romaji_syllables.append(temp)
+    for romaji_syllable in romaji_syllables:
+        phase = 0
+        initial_index = -1
+        medial_index = -1
+        final_index = -1
+        while phase < 4:
+            if phase == 0:  # initials
+                for index, initial in enumerate(initials):
+                    if romaji_syllable.startswith(initial):
+                        if initial_index >= 0 and \
+                           len(initials[initial_index]) > len(initial):
+                            continue
+                        initial_index = index
+                if initial_index >= 0:
+                    romaji_syllable = \
+                        romaji_syllable[len(initials[initial_index]):]
+                phase += 1
+            elif phase == 1:  # medials
+                for index, medial in enumerate(medials):
+                    if romaji_syllable.startswith(medial):
+                        if medial_index >= 0 and \
+                           len(medials[medial_index]) > len(medial):
+                            continue
+                        medial_index = index
+                if medial_index >= 0:
+                    romaji_syllable = \
+                        romaji_syllable[len(medials[medial_index]):]
+                phase += 1
+            elif phase == 2:  # finals
+                for index, final in enumerate(finals):
+                    if romaji_syllable.startswith(final):
+                        if final_index >= 0 and \
+                           len(finals[final_index]) > len(final):
+                            continue
+                        final_index = index
+                if final_index >= 0:
+                    romaji_syllable = \
+                        romaji_syllable[len(finals[final_index]):]
+                phase += 1
+            else:
+                hangul_syllable = ""
+                if initial_index >= 0:
+                    try:
+                        hangul_syllable += chr(initial_base + initial_index)
+                    except ValueError:
+                        hangul_syllable += unichr(initial_base + initial_index)
+                elif initial_filler:
+                    try:
+                        hangul_syllable += chr(initial_filler)
+                    except ValueError:
+                        hangul_syllable += unichr(initial_filler)
+                if medial_index >= 0:
+                    try:
+                        hangul_syllable += chr(medial_base + medial_index)
+                    except ValueError:
+                        hangul_syllable += unichr(medial_base + medial_index)
+                elif medial_filler:
+                    try:
+                        hangul_syllable += chr(medial_filler)
+                    except ValueError:
+                        hangul_syllable += unichr(medial_filler)
+                if final_index >= 0:
+                    try:
+                        hangul_syllable += chr(final_base + final_index)
+                    except ValueError:
+                        hangul_syllable += unichr(final_base + final_index)
+                elif final_filler:
+                    try:
+                        hangul_syllable += chr(final_filler)
+                    except ValueError:
+                        hangul_syllable += unichr(final_filler)
+                hangul_syllables.append(hangul_syllable)
+                phase += 1
+    return "".join(hangul_syllables)
+}%
+
+public protocol KoreanigaProtocol: CustomStringConvertible, CustomDebugStringConvertible {
+
+    var string: String {get}
+}
+
+public enum Koreaniga {
+%{
+all_pp = {
+    ("Gwa", "Wa"): ("gwa", "wa"),
+    ("A", "Ya"): ("a", "ya"),
+    ("Eu", ): ("eu", "", ""),
+    ("EuRo", "Ro"): ("euRo", "ro", "ro"),
+    ("Eun", ): ("eun", "neun"),
+    ("Eun", "Neun"): ("eun", "neun"),
+    ("Eul", ): ("eul", "reul"),
+    ("Eul", "Reul"): ("eul", "reul"),
+    ("I", ): ("i", ""),
+    ("I", "Ga"): ("i", "ga"),
+    ("IE", "Ye"): ("iE", "ye"),
+    ("IEo", "Yeo"): ("iEo", "yeo"),
+    ("IEoss", "Yeoss"): ("iEoss", "yeoss"),
+    ("IO", "Yo"): ("iO", "yo"),
+}
+general_chains = {
+    ("ga", ("I", "Ga")),
+    ("gwa", ("Gwa", "Wa")),
+    ("neun", ("Eun", "Neun")),
+    ("ro", ("EuRo", "Ro")),
+    ("reul", ("Eul", "Reul")),
+    ("a", ("A", "Ya")),
+    ("ya", ("A", "Ya")),
+    ("yeoss", ("IEoss", "Yeoss")),
+    ("ye", ("IE", "Ye")),
+    ("wa", ("Gwa", "Wa")),
+    ("eu", ("Eu", )),
+    ("eun", ("Eun", )),
+    ("euRo", ("EuRo", "Ro")),
+    ("eul", ("Eul", )),
+    ("i", ("I", )),
+    ("iEo", ("IEo", )),
+    ("iE", ("IE", "Ye")),
+    ("iEoss", ("IEoss", "Yeoss")),
+    ("iE", ("IE", "Ye")),
+    ("iO", ("IO", "Yo")),
+}
+all_chain = {
+    (): [
+        "ga",
+        "gwa",
+        "neun",
+        "ro",
+        "reul",
+        "a",
+        "ya",
+        "yeoss",
+        "ye",
+        "wa",
+        "eu",
+        "eun",
+        "euRo",
+        "eul",
+        "i",
+        "iEoss",
+        "iO",
+    ],
+    ("Gwa", ): [
+        "wa",
+    ],
+    ("Eu", ): [
+        "ro",
+    ],
+    ("Eun", ): [
+        "neun",
+    ],
+    ("Eul", ): [
+        "reul",
+    ],
+    ("I", ): [
+        "ga",
+        ("e", ("IE", "Ye")),
+        ("eo", ("IEo", "Yeo")),
+        ("eoss", ("IEoss", "Yeoss")),
+        ("o", ("IO", "Yo")),
+    ],
+}
+}%
+% for pp, defaultpps in all_pp.items():
+    %{
+    classname = "_".join(pp)
+    }%
+
+    public struct ${classname}: KoreanigaProtocol {
+    %{
+    if pp in all_chain.keys():
+        chains = all_chain[pp]
+    else:
+        chains = []
+    }%
+
+        public let string: String
+
+        fileprivate let postpositionForAnyConsonant: String
+            % if len(defaultpps) > 2:
+        fileprivate let postpositionForRieul: String
+            % end
+        fileprivate let postpositionForAnyVowel: String
+    % for chain in chains:
+
+        %{
+        if isinstance(chain, str):
+            try:
+                chain = filter(lambda x: x[0] == chain, general_chains) \
+                        .__next__()
+            except:
+                chain = None
+        }%
+        % if isinstance(chain, tuple):
+            %{
+            methodname = chain[0]
+            downstream = "_".join(chain[1])
+            }%
+        public var ${methodname}: Koreaniga.${downstream} {
+            %{
+            ppstrings = tuple(map(lambda x: normalize("NFKC", hangulise(x)),
+                                  all_pp[chain[1]]))
+            }%
+            return Koreaniga.${downstream}(string: self.string)
+        }
+        % end
+    % end
+
+        public var description: String {
+            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            var postposition: String?
+            for scalar in decomposed.unicodeScalars.reversed() {
+                switch UInt(scalar.value) {
+                case 0x1161 ... 0x1175:
+                    postposition = self.postpositionForAnyVowel
+    % if len(defaultpps) > 2:
+                case 0x11af:
+                    postposition = self.postpositionForRieul
+    % end
+                case 0x11a8 ... 0x11c2:
+                    postposition = self.postpositionForAnyConsonant
+                default:
+                    continue
+                }
+                break
+            }
+            if postposition == nil {
+                if self.postpositionForAnyVowel.isEmpty {
+                    postposition = "(\(self.postpositionForAnyConsonant))"
+                }
+                else {
+                    let postpositionForAnyConsonant: String
+                    let postpositionForAnyVowel: String
+                    if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
+                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                    }
+                    else {
+                        postpositionForAnyConsonant = self.postpositionForAnyConsonant
+                    }
+                    postpositionForAnyVowel = self.postpositionForAnyVowel
+                    if !postpositionForAnyConsonant.isEmpty {
+                        postposition = "(\(postpositionForAnyConsonant))\(postpositionForAnyVowel)"
+                    }
+                    else {
+                        postposition = postpositionForAnyVowel
+                    }
+                }
+            }
+            return self.string + (postposition ?? "")
+        }
+
+        public var debugDescription: String {
+            var postposition: String?
+            let postpositionForAnyConsonant: String
+            let postpositionForAnyVowel: String
+            if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
+                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+            }
+            else {
+                postpositionForAnyConsonant = self.postpositionForAnyConsonant
+            }
+            postpositionForAnyVowel = self.postpositionForAnyVowel
+            if !postpositionForAnyConsonant.isEmpty {
+                postposition = "(\(postpositionForAnyConsonant))\(postpositionForAnyVowel)"
+            }
+            else {
+                postposition = postpositionForAnyVowel
+            }
+            return self.string + (postposition ?? "")
+        }
+
+        fileprivate init
+            (string: String,
+             postpositionForAnyConsonant: String = "${defaultpps[0]}",
+    % if len(defaultpps) > 2:
+             postpositionForRieul: String = "${defaultpps[1]}",
+    % end
+             postpositionForAnyVowel: String = "${defaultpps[-1]}")
+        {
+            self.string = string
+            self.postpositionForAnyConsonant = postpositionForAnyConsonant
+    % if len(defaultpps) > 2:
+            self.postpositionForRieul = postpositionForRieul
+    % end
+            self.postpositionForAnyVowel = postpositionForAnyVowel
+        }
+    }
+% end
+}
+
+extension String {
+% for chain in all_chain[()]:
+
+    %{
+    if isinstance(chain, str):
+        try:
+            chain = filter(lambda x: x[0] == chain, general_chains) \
+                    .__next__()
+        except:
+            chain = None
+            
+    }%
+    % if isinstance(chain, tuple):
+        %{
+        methodname = chain[0]
+        downstream = "_".join(chain[1])
+        }%
+    public var ${methodname}: Koreaniga.${downstream} {
+        %{
+        ppstrings = tuple(map(lambda x: normalize("NFKC", hangulise(x)),
+                              all_pp[chain[1]]))
+        }%
+        let downstream = Koreaniga.${downstream}(string: self)
+        return downstream
+    % end
+    }
+% end
+}
+% for pp, defaultpps in all_pp.items():
+    %{
+    classname = "_".join(pp)
+    if pp in all_chain.keys():
+        chains = all_chain[pp]
+    else:
+        chains = []
+    }%
+    % if chains:
+
+extension Koreaniga.${classname} {
+        % for chain in chains:
+
+            %{
+            if isinstance(chain, str):
+                try:
+                    chain = filter(lambda x: x[0] == chain, general_chains) \
+                            .__next__()
+                except:
+                    chain = None
+            methodname = hangulise(chain[0])
+            downstream = "_".join(chain[1])
+            }%
+    @inlinable
+    public var ${methodname}: Koreaniga.${downstream} {
+        return self.${chain[0]}
+    }
+        % end
+}
+    % end
+% end
+
+extension String {
+% for chain in all_chain[()]:
+
+    %{
+    if isinstance(chain, str):
+        try:
+            chain = filter(lambda x: x[0] == chain, general_chains) \
+                    .__next__()
+        except:
+            chain = None
+            
+    }%
+    % if isinstance(chain, tuple):
+        %{
+        methodname = hangulise(chain[0])
+        downstream = "_".join(chain[1])
+        }%
+    @inlinable
+    public var ${methodname}: Koreaniga.${downstream} {
+        return self.${chain[0]}
+    % end
+    }
+% end
+}
+% for pp, defaultpps in all_pp.items():
+    %{
+    classname = "_".join(pp)
+    if pp in all_chain.keys():
+        chains = all_chain[pp]
+    else:
+        chains = []
+    }%
+    % if chains:
+
+extension Koreaniga.${classname} {
+        % for chain in chains:
+
+            %{
+            if isinstance(chain, str):
+                try:
+                    chain = filter(lambda x: x[0] == chain, general_chains) \
+                            .__next__()
+                except:
+                    chain = None
+            methodname = normalize("NFKC", hangulise(chain[0]))
+            downstream = "_".join(chain[1])
+            }%
+    @inlinable
+    public var ${methodname}: Koreaniga.${downstream} {
+        return self.${chain[0]}
+    }
+        % end
+}
+    % end
+% end
+
+extension String {
+% for chain in all_chain[()]:
+
+    %{
+    if isinstance(chain, str):
+        try:
+            chain = filter(lambda x: x[0] == chain, general_chains) \
+                    .__next__()
+        except:
+            chain = None
+            
+    }%
+    % if isinstance(chain, tuple):
+        %{
+        methodname = normalize("NFKC", hangulise(chain[0]))
+        downstream = "_".join(chain[1])
+        }%
+    @inlinable
+    public var ${methodname}: Koreaniga.${downstream} {
+        return self.${chain[0]}
+    % end
+    }
+% end
+}
