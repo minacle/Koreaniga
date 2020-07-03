@@ -133,9 +133,9 @@ all_pp = {
     ("Eul", "Reul"): ("eul", "reul"),
     ("I", ): ("i", ""),
     ("I", "Ga"): ("i", "ga"),
-    ("IE", "Ye"): ("iE", "ye"),
     ("IEo", "Yeo"): ("iEo", "yeo"),
     ("IEoss", "Yeoss"): ("iEoss", "yeoss"),
+    ("IE", "Ye"): ("iE", "ye"),
     ("IO", "Yo"): ("iO", "yo"),
 }
 general_chains = {
@@ -146,6 +146,7 @@ general_chains = {
     ("reul", ("Eul", "Reul")),
     ("a", ("A", "Ya")),
     ("ya", ("A", "Ya")),
+    ("yeo", ("IEo", "Yeo")),
     ("yeoss", ("IEoss", "Yeoss")),
     ("ye", ("IE", "Ye")),
     ("wa", ("Gwa", "Wa")),
@@ -155,7 +156,6 @@ general_chains = {
     ("eul", ("Eul", )),
     ("i", ("I", )),
     ("iEo", ("IEo", )),
-    ("iE", ("IE", "Ye")),
     ("iEoss", ("IEoss", "Yeoss")),
     ("iE", ("IE", "Ye")),
     ("iO", ("IO", "Yo")),

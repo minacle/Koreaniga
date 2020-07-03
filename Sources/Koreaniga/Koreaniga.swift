@@ -822,83 +822,6 @@ public enum Koreaniga {
         }
     }
 
-    public struct IE_Ye: KoreanigaProtocol {
-
-        public let string: String
-
-        fileprivate let postpositionForAnyConsonant: String
-        fileprivate let postpositionForAnyVowel: String
-
-        public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
-            var postposition: String?
-            for scalar in decomposed.unicodeScalars.reversed() {
-                switch UInt(scalar.value) {
-                case 0x1161 ... 0x1175:
-                    postposition = self.postpositionForAnyVowel
-                case 0x11a8 ... 0x11c2:
-                    postposition = self.postpositionForAnyConsonant
-                default:
-                    continue
-                }
-                break
-            }
-            if postposition == nil {
-                if self.postpositionForAnyVowel.isEmpty {
-                    postposition = "(\(self.postpositionForAnyConsonant))"
-                }
-                else {
-                    let postpositionForAnyConsonant: String
-                    let postpositionForAnyVowel: String
-                    if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
-                    }
-                    else {
-                        postpositionForAnyConsonant = self.postpositionForAnyConsonant
-                    }
-                    postpositionForAnyVowel = self.postpositionForAnyVowel
-                    if !postpositionForAnyConsonant.isEmpty {
-                        postposition = "(\(postpositionForAnyConsonant))\(postpositionForAnyVowel)"
-                    }
-                    else {
-                        postposition = postpositionForAnyVowel
-                    }
-                }
-            }
-            return self.string + (postposition ?? "")
-        }
-
-        public var debugDescription: String {
-            var postposition: String?
-            let postpositionForAnyConsonant: String
-            let postpositionForAnyVowel: String
-            if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
-            }
-            else {
-                postpositionForAnyConsonant = self.postpositionForAnyConsonant
-            }
-            postpositionForAnyVowel = self.postpositionForAnyVowel
-            if !postpositionForAnyConsonant.isEmpty {
-                postposition = "(\(postpositionForAnyConsonant))\(postpositionForAnyVowel)"
-            }
-            else {
-                postposition = postpositionForAnyVowel
-            }
-            return self.string + (postposition ?? "")
-        }
-
-        fileprivate init
-            (string: String,
-             postpositionForAnyConsonant: String = "이에",
-             postpositionForAnyVowel: String = "예")
-        {
-            self.string = string
-            self.postpositionForAnyConsonant = postpositionForAnyConsonant
-            self.postpositionForAnyVowel = postpositionForAnyVowel
-        }
-    }
-
     public struct IEo_Yeo: KoreanigaProtocol {
 
         public let string: String
@@ -1046,6 +969,83 @@ public enum Koreaniga {
             (string: String,
              postpositionForAnyConsonant: String = "이었",
              postpositionForAnyVowel: String = "였")
+        {
+            self.string = string
+            self.postpositionForAnyConsonant = postpositionForAnyConsonant
+            self.postpositionForAnyVowel = postpositionForAnyVowel
+        }
+    }
+
+    public struct IE_Ye: KoreanigaProtocol {
+
+        public let string: String
+
+        fileprivate let postpositionForAnyConsonant: String
+        fileprivate let postpositionForAnyVowel: String
+
+        public var description: String {
+            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            var postposition: String?
+            for scalar in decomposed.unicodeScalars.reversed() {
+                switch UInt(scalar.value) {
+                case 0x1161 ... 0x1175:
+                    postposition = self.postpositionForAnyVowel
+                case 0x11a8 ... 0x11c2:
+                    postposition = self.postpositionForAnyConsonant
+                default:
+                    continue
+                }
+                break
+            }
+            if postposition == nil {
+                if self.postpositionForAnyVowel.isEmpty {
+                    postposition = "(\(self.postpositionForAnyConsonant))"
+                }
+                else {
+                    let postpositionForAnyConsonant: String
+                    let postpositionForAnyVowel: String
+                    if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                    }
+                    else {
+                        postpositionForAnyConsonant = self.postpositionForAnyConsonant
+                    }
+                    postpositionForAnyVowel = self.postpositionForAnyVowel
+                    if !postpositionForAnyConsonant.isEmpty {
+                        postposition = "(\(postpositionForAnyConsonant))\(postpositionForAnyVowel)"
+                    }
+                    else {
+                        postposition = postpositionForAnyVowel
+                    }
+                }
+            }
+            return self.string + (postposition ?? "")
+        }
+
+        public var debugDescription: String {
+            var postposition: String?
+            let postpositionForAnyConsonant: String
+            let postpositionForAnyVowel: String
+            if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+            }
+            else {
+                postpositionForAnyConsonant = self.postpositionForAnyConsonant
+            }
+            postpositionForAnyVowel = self.postpositionForAnyVowel
+            if !postpositionForAnyConsonant.isEmpty {
+                postposition = "(\(postpositionForAnyConsonant))\(postpositionForAnyVowel)"
+            }
+            else {
+                postposition = postpositionForAnyVowel
+            }
+            return self.string + (postposition ?? "")
+        }
+
+        fileprivate init
+            (string: String,
+             postpositionForAnyConsonant: String = "이에",
+             postpositionForAnyVowel: String = "예")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
