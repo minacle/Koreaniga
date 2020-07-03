@@ -39,7 +39,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -61,7 +61,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -78,8 +78,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "gwa",
-             postpositionForAnyVowel: String = "wa")
+             postpositionForAnyConsonant: String = "과",
+             postpositionForAnyVowel: String = "와")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -116,7 +116,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -138,7 +138,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -155,8 +155,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "a",
-             postpositionForAnyVowel: String = "ya")
+             postpositionForAnyConsonant: String = "아",
+             postpositionForAnyVowel: String = "야")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -200,7 +200,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -222,7 +222,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -239,7 +239,7 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "eu",
+             postpositionForAnyConsonant: String = "으",
              postpositionForRieul: String = "",
              postpositionForAnyVowel: String = "")
         {
@@ -282,7 +282,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -304,7 +304,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -321,9 +321,9 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "euRo",
-             postpositionForRieul: String = "ro",
-             postpositionForAnyVowel: String = "ro")
+             postpositionForAnyConsonant: String = "으로",
+             postpositionForRieul: String = "로",
+             postpositionForAnyVowel: String = "로")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -365,7 +365,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -387,7 +387,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -404,8 +404,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "eun",
-             postpositionForAnyVowel: String = "neun")
+             postpositionForAnyConsonant: String = "은",
+             postpositionForAnyVowel: String = "는")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -442,7 +442,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -464,7 +464,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -481,8 +481,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "eun",
-             postpositionForAnyVowel: String = "neun")
+             postpositionForAnyConsonant: String = "은",
+             postpositionForAnyVowel: String = "는")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -523,7 +523,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -545,7 +545,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -562,8 +562,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "eul",
-             postpositionForAnyVowel: String = "reul")
+             postpositionForAnyConsonant: String = "을",
+             postpositionForAnyVowel: String = "를")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -600,7 +600,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -622,7 +622,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -639,8 +639,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "eul",
-             postpositionForAnyVowel: String = "reul")
+             postpositionForAnyConsonant: String = "을",
+             postpositionForAnyVowel: String = "를")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -697,7 +697,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -719,7 +719,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -736,7 +736,7 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "i",
+             postpositionForAnyConsonant: String = "이",
              postpositionForAnyVowel: String = "")
         {
             self.string = string
@@ -774,7 +774,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -796,7 +796,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -813,8 +813,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "i",
-             postpositionForAnyVowel: String = "ga")
+             postpositionForAnyConsonant: String = "이",
+             postpositionForAnyVowel: String = "가")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -851,7 +851,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -873,7 +873,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -890,8 +890,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "iE",
-             postpositionForAnyVowel: String = "ye")
+             postpositionForAnyConsonant: String = "이에",
+             postpositionForAnyVowel: String = "예")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -928,7 +928,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -950,7 +950,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -967,8 +967,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "iEo",
-             postpositionForAnyVowel: String = "yeo")
+             postpositionForAnyConsonant: String = "이어",
+             postpositionForAnyVowel: String = "여")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -1005,7 +1005,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -1027,7 +1027,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -1044,8 +1044,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "iEoss",
-             postpositionForAnyVowel: String = "yeoss")
+             postpositionForAnyConsonant: String = "이었",
+             postpositionForAnyVowel: String = "였")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -1082,7 +1082,7 @@ public enum Koreaniga {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -1104,7 +1104,7 @@ public enum Koreaniga {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -1121,8 +1121,8 @@ public enum Koreaniga {
 
         fileprivate init
             (string: String,
-             postpositionForAnyConsonant: String = "iO",
-             postpositionForAnyVowel: String = "yo")
+             postpositionForAnyConsonant: String = "이오",
+             postpositionForAnyVowel: String = "요")
         {
             self.string = string
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
@@ -1216,6 +1216,10 @@ extension String {
     public var iO: Koreaniga.IO_Yo {
         let downstream = Koreaniga.IO_Yo(string: self)
         return downstream
+    }
+
+    public init(_ koreaniga: KoreanigaProtocol) {
+        self = koreaniga.description
     }
 }
 

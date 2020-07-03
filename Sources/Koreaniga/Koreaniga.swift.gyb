@@ -204,6 +204,8 @@ all_chain = {
 % for pp, defaultpps in all_pp.items():
     %{
     classname = "_".join(pp)
+    defaultpps = tuple(map(lambda x: normalize("NFKC", hangulise(x)),
+                           defaultpps))
     }%
 
     public struct ${classname}: KoreanigaProtocol {
@@ -272,7 +274,7 @@ all_chain = {
                     let postpositionForAnyConsonant: String
                     let postpositionForAnyVowel: String
                     if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                        postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                        postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
                     }
                     else {
                         postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -294,7 +296,7 @@ all_chain = {
             let postpositionForAnyConsonant: String
             let postpositionForAnyVowel: String
             if self.postpositionForAnyConsonant.hasSuffix(self.postpositionForAnyVowel) {
-                postpositionForAnyConsonant = String.init(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
+                postpositionForAnyConsonant = String(self.postpositionForAnyConsonant[..<(self.postpositionForAnyConsonant.index(self.postpositionForAnyConsonant.endIndex, offsetBy: self.postpositionForAnyVowel.count - self.postpositionForAnyConsonant.count))])
             }
             else {
                 postpositionForAnyConsonant = self.postpositionForAnyConsonant
@@ -355,6 +357,10 @@ extension String {
     % end
     }
 % end
+
+    public init(_ koreaniga: KoreanigaProtocol) {
+        self = koreaniga.description
+    }
 }
 % for pp, defaultpps in all_pp.items():
     %{
