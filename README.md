@@ -1,7 +1,10 @@
 # Korean(i)ga
 
-A Korean postpositions processing package for *new-age*.
+![License](https://img.shields.io/badge/license-UNLICENSE-black?style=flat)
+![Platform](https://img.shields.io/badge/platform-iOS%20macOS%20tvOS%20watchOS%20Linux-brightgreen?style=flat)
+![Release](https://img.shields.io/github/v/release/minacle/Koreaniga?sort=semver)
 
+A Korean postpositions processing package for *new-age*.
 
 # 코리안(이)가
 
@@ -118,3 +121,24 @@ $R4: String = "빛을 낮이라 칭하시고 어두움을 밤이라 칭하시니
 - `가위` → `가위요`
 - `연필` → `연필이오`
 - `볼펜` → `볼펜이오`
+
+## 주의점
+
+### ‘요’
+
+**코리안(이)가**에서는 ‘이오/요’ 종결 어미와 ‘요’ 연결 어미의 혼동을 최소화하기 위해 `.요` 프로퍼티를 제공하지 않습니다.
+
+1. ‘이오/요’ 종결 어미를 사용하기 위해서는 `.이오` 프로퍼티 또는 `.이.오` 프로퍼티 체인을 사용합니다.  
+   ```swift
+     1> import Koreaniga
+     2> "이것은 \("감".이오)."
+   $R0: String = "이것은 감이오."
+     3> "이것은 \("배".이오)."
+   $R1: String = "이것은 배요."
+   ```
+2. ‘요’ 연결 어미를 사용하기 위해서는 `.이` 프로퍼티와 `"요"` 문자열을 사용합니다.  
+   ```swift
+     1> import Koreaniga
+     2> "이것은 \("감".이)요, 저것은 \("배".이)요, 그것은 \("사과".이)다."
+   $R0: String = "이것은 감이요, 저것은 배요, 그것은 사과다."
+   ```
