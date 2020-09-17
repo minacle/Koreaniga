@@ -117,7 +117,7 @@ def hangulise(romaji):
 
 public protocol KoreanigaProtocol: CustomStringConvertible, CustomDebugStringConvertible {
 
-    var string: String {get}
+    var origin: String {get}
 }
 
 public enum Koreaniga {
@@ -155,7 +155,7 @@ general_chains = {
     ("euRo", ("EuRo", "Ro")),
     ("eul", ("Eul", )),
     ("i", ("I", )),
-    ("iEo", ("IEo", )),
+    ("iEo", ("IEo", "Yeo")),
     ("iEoss", ("IEoss", "Yeoss")),
     ("iE", ("IE", "Ye")),
     ("iO", ("IO", "Yo")),
@@ -169,6 +169,7 @@ all_chain = {
         "reul",
         "a",
         "ya",
+        "yeo",
         "yeoss",
         "ye",
         "wa",
@@ -177,6 +178,7 @@ all_chain = {
         "euRo",
         "eul",
         "i",
+        "iEo",
         "iEoss",
         "iO",
     ],
@@ -216,7 +218,7 @@ all_chain = {
         chains = []
     }%
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
             % if len(defaultpps) > 2:
@@ -243,13 +245,13 @@ all_chain = {
             ppstrings = tuple(map(lambda x: normalize("NFKC", hangulise(x)),
                                   all_pp[chain[1]]))
             }%
-            return Koreaniga.${downstream}(string: self.string)
+            return Koreaniga.${downstream}(origin: self.origin)
         }
         % end
     % end
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -288,7 +290,7 @@ all_chain = {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -308,18 +310,18 @@ all_chain = {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "${defaultpps[0]}",
     % if len(defaultpps) > 2:
              postpositionForRieul: String = "${defaultpps[1]}",
     % end
              postpositionForAnyVowel: String = "${defaultpps[-1]}")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
     % if len(defaultpps) > 2:
             self.postpositionForRieul = postpositionForRieul
@@ -352,7 +354,7 @@ extension String {
         ppstrings = tuple(map(lambda x: normalize("NFKC", hangulise(x)),
                               all_pp[chain[1]]))
         }%
-        let downstream = Koreaniga.${downstream}(string: self)
+        let downstream = Koreaniga.${downstream}(origin: self)
         return downstream
     % end
     }

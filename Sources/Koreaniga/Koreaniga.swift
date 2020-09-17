@@ -5,20 +5,20 @@ import Foundation
 
 public protocol KoreanigaProtocol: CustomStringConvertible, CustomDebugStringConvertible {
 
-    var string: String {get}
+    var origin: String {get}
 }
 
 public enum Koreaniga {
 
     public struct Gwa_Wa: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -53,7 +53,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -73,15 +73,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "과",
              postpositionForAnyVowel: String = "와")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -89,13 +89,13 @@ public enum Koreaniga {
 
     public struct A_Ya: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -130,7 +130,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -150,15 +150,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "아",
              postpositionForAnyVowel: String = "야")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -166,18 +166,18 @@ public enum Koreaniga {
 
     public struct Eu: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForRieul: String
         fileprivate let postpositionForAnyVowel: String
 
         public var ro: Koreaniga.EuRo_Ro {
-            return Koreaniga.EuRo_Ro(string: self.string)
+            return Koreaniga.EuRo_Ro(origin: self.origin)
         }
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -214,7 +214,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -234,16 +234,16 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "으",
              postpositionForRieul: String = "",
              postpositionForAnyVowel: String = "")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForRieul = postpositionForRieul
             self.postpositionForAnyVowel = postpositionForAnyVowel
@@ -252,14 +252,14 @@ public enum Koreaniga {
 
     public struct EuRo_Ro: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForRieul: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -296,7 +296,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -316,16 +316,16 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "으로",
              postpositionForRieul: String = "로",
              postpositionForAnyVowel: String = "로")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForRieul = postpositionForRieul
             self.postpositionForAnyVowel = postpositionForAnyVowel
@@ -334,17 +334,17 @@ public enum Koreaniga {
 
     public struct Eun: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var neun: Koreaniga.Eun_Neun {
-            return Koreaniga.Eun_Neun(string: self.string)
+            return Koreaniga.Eun_Neun(origin: self.origin)
         }
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -379,7 +379,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -399,15 +399,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "은",
              postpositionForAnyVowel: String = "는")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -415,13 +415,13 @@ public enum Koreaniga {
 
     public struct Eun_Neun: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -456,7 +456,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -476,15 +476,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "은",
              postpositionForAnyVowel: String = "는")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -492,17 +492,17 @@ public enum Koreaniga {
 
     public struct Eul: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var reul: Koreaniga.Eul_Reul {
-            return Koreaniga.Eul_Reul(string: self.string)
+            return Koreaniga.Eul_Reul(origin: self.origin)
         }
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -537,7 +537,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -557,15 +557,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "을",
              postpositionForAnyVowel: String = "를")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -573,13 +573,13 @@ public enum Koreaniga {
 
     public struct Eul_Reul: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -614,7 +614,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -634,15 +634,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "을",
              postpositionForAnyVowel: String = "를")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -650,33 +650,33 @@ public enum Koreaniga {
 
     public struct I: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var ga: Koreaniga.I_Ga {
-            return Koreaniga.I_Ga(string: self.string)
+            return Koreaniga.I_Ga(origin: self.origin)
         }
 
         public var e: Koreaniga.IE_Ye {
-            return Koreaniga.IE_Ye(string: self.string)
+            return Koreaniga.IE_Ye(origin: self.origin)
         }
 
         public var eo: Koreaniga.IEo_Yeo {
-            return Koreaniga.IEo_Yeo(string: self.string)
+            return Koreaniga.IEo_Yeo(origin: self.origin)
         }
 
         public var eoss: Koreaniga.IEoss_Yeoss {
-            return Koreaniga.IEoss_Yeoss(string: self.string)
+            return Koreaniga.IEoss_Yeoss(origin: self.origin)
         }
 
         public var o: Koreaniga.IO_Yo {
-            return Koreaniga.IO_Yo(string: self.string)
+            return Koreaniga.IO_Yo(origin: self.origin)
         }
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -711,7 +711,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -731,15 +731,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "이",
              postpositionForAnyVowel: String = "")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -747,13 +747,13 @@ public enum Koreaniga {
 
     public struct I_Ga: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -788,7 +788,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -808,15 +808,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "이",
              postpositionForAnyVowel: String = "가")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -824,13 +824,13 @@ public enum Koreaniga {
 
     public struct IEo_Yeo: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -865,7 +865,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -885,15 +885,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "이어",
              postpositionForAnyVowel: String = "여")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -901,13 +901,13 @@ public enum Koreaniga {
 
     public struct IEoss_Yeoss: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -942,7 +942,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -962,15 +962,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "이었",
              postpositionForAnyVowel: String = "였")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -978,13 +978,13 @@ public enum Koreaniga {
 
     public struct IE_Ye: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -1019,7 +1019,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -1039,15 +1039,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "이에",
              postpositionForAnyVowel: String = "예")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -1055,13 +1055,13 @@ public enum Koreaniga {
 
     public struct IO_Yo: KoreanigaProtocol {
 
-        public let string: String
+        public let origin: String
 
         fileprivate let postpositionForAnyConsonant: String
         fileprivate let postpositionForAnyVowel: String
 
         public var description: String {
-            let decomposed = self.string.decomposedStringWithCanonicalMapping
+            let decomposed = self.origin.decomposedStringWithCanonicalMapping
             var postposition: String?
             for scalar in decomposed.unicodeScalars.reversed() {
                 switch UInt(scalar.value) {
@@ -1096,7 +1096,7 @@ public enum Koreaniga {
                     }
                 }
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         public var debugDescription: String {
@@ -1116,15 +1116,15 @@ public enum Koreaniga {
             else {
                 postposition = postpositionForAnyVowel
             }
-            return self.string + (postposition ?? "")
+            return self.origin + (postposition ?? "")
         }
 
         fileprivate init
-            (string: String,
+            (origin: String,
              postpositionForAnyConsonant: String = "이오",
              postpositionForAnyVowel: String = "요")
         {
-            self.string = string
+            self.origin = origin
             self.postpositionForAnyConsonant = postpositionForAnyConsonant
             self.postpositionForAnyVowel = postpositionForAnyVowel
         }
@@ -1134,87 +1134,97 @@ public enum Koreaniga {
 extension String {
 
     public var ga: Koreaniga.I_Ga {
-        let downstream = Koreaniga.I_Ga(string: self)
+        let downstream = Koreaniga.I_Ga(origin: self)
         return downstream
     }
 
     public var gwa: Koreaniga.Gwa_Wa {
-        let downstream = Koreaniga.Gwa_Wa(string: self)
+        let downstream = Koreaniga.Gwa_Wa(origin: self)
         return downstream
     }
 
     public var neun: Koreaniga.Eun_Neun {
-        let downstream = Koreaniga.Eun_Neun(string: self)
+        let downstream = Koreaniga.Eun_Neun(origin: self)
         return downstream
     }
 
     public var ro: Koreaniga.EuRo_Ro {
-        let downstream = Koreaniga.EuRo_Ro(string: self)
+        let downstream = Koreaniga.EuRo_Ro(origin: self)
         return downstream
     }
 
     public var reul: Koreaniga.Eul_Reul {
-        let downstream = Koreaniga.Eul_Reul(string: self)
+        let downstream = Koreaniga.Eul_Reul(origin: self)
         return downstream
     }
 
     public var a: Koreaniga.A_Ya {
-        let downstream = Koreaniga.A_Ya(string: self)
+        let downstream = Koreaniga.A_Ya(origin: self)
         return downstream
     }
 
     public var ya: Koreaniga.A_Ya {
-        let downstream = Koreaniga.A_Ya(string: self)
+        let downstream = Koreaniga.A_Ya(origin: self)
+        return downstream
+    }
+
+    public var yeo: Koreaniga.IEo_Yeo {
+        let downstream = Koreaniga.IEo_Yeo(origin: self)
         return downstream
     }
 
     public var yeoss: Koreaniga.IEoss_Yeoss {
-        let downstream = Koreaniga.IEoss_Yeoss(string: self)
+        let downstream = Koreaniga.IEoss_Yeoss(origin: self)
         return downstream
     }
 
     public var ye: Koreaniga.IE_Ye {
-        let downstream = Koreaniga.IE_Ye(string: self)
+        let downstream = Koreaniga.IE_Ye(origin: self)
         return downstream
     }
 
     public var wa: Koreaniga.Gwa_Wa {
-        let downstream = Koreaniga.Gwa_Wa(string: self)
+        let downstream = Koreaniga.Gwa_Wa(origin: self)
         return downstream
     }
 
     public var eu: Koreaniga.Eu {
-        let downstream = Koreaniga.Eu(string: self)
+        let downstream = Koreaniga.Eu(origin: self)
         return downstream
     }
 
     public var eun: Koreaniga.Eun {
-        let downstream = Koreaniga.Eun(string: self)
+        let downstream = Koreaniga.Eun(origin: self)
         return downstream
     }
 
     public var euRo: Koreaniga.EuRo_Ro {
-        let downstream = Koreaniga.EuRo_Ro(string: self)
+        let downstream = Koreaniga.EuRo_Ro(origin: self)
         return downstream
     }
 
     public var eul: Koreaniga.Eul {
-        let downstream = Koreaniga.Eul(string: self)
+        let downstream = Koreaniga.Eul(origin: self)
         return downstream
     }
 
     public var i: Koreaniga.I {
-        let downstream = Koreaniga.I(string: self)
+        let downstream = Koreaniga.I(origin: self)
+        return downstream
+    }
+
+    public var iEo: Koreaniga.IEo_Yeo {
+        let downstream = Koreaniga.IEo_Yeo(origin: self)
         return downstream
     }
 
     public var iEoss: Koreaniga.IEoss_Yeoss {
-        let downstream = Koreaniga.IEoss_Yeoss(string: self)
+        let downstream = Koreaniga.IEoss_Yeoss(origin: self)
         return downstream
     }
 
     public var iO: Koreaniga.IO_Yo {
-        let downstream = Koreaniga.IO_Yo(string: self)
+        let downstream = Koreaniga.IO_Yo(origin: self)
         return downstream
     }
 
@@ -1313,6 +1323,11 @@ extension String {
     }
 
     @inlinable
+    public var 여: Koreaniga.IEo_Yeo {
+        return self.yeo
+    }
+
+    @inlinable
     public var 였: Koreaniga.IEoss_Yeoss {
         return self.yeoss
     }
@@ -1350,6 +1365,11 @@ extension String {
     @inlinable
     public var 이: Koreaniga.I {
         return self.i
+    }
+
+    @inlinable
+    public var 이어: Koreaniga.IEo_Yeo {
+        return self.iEo
     }
 
     @inlinable
@@ -1453,6 +1473,11 @@ extension String {
     }
 
     @inlinable
+    public var 여: Koreaniga.IEo_Yeo {
+        return self.yeo
+    }
+
+    @inlinable
     public var 였: Koreaniga.IEoss_Yeoss {
         return self.yeoss
     }
@@ -1490,6 +1515,11 @@ extension String {
     @inlinable
     public var 이: Koreaniga.I {
         return self.i
+    }
+
+    @inlinable
+    public var 이어: Koreaniga.IEo_Yeo {
+        return self.iEo
     }
 
     @inlinable
