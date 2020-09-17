@@ -55,22 +55,42 @@ then
     SWIFTVER=${SWIFTVER%.*}
 fi
 
+SWIFTVERMAJ=$(cut -f 1 -d '.' <<<$SWIFTVER)
+SWIFTVERMIN=$(cut -f 2 -d '.' <<<$SWIFTVER)
+
 if [ -z "$TMPDIR" ]
 then
     TMPDIR="$(dirname $(mktemp -u))"
 fi
 
 GYB="$TMPDIR/gyb-$SWIFTVER/gyb"
-REMOTE="https://github.com/apple/swift/raw/swift-$SWIFTVER-branch/utils/gyb.py"
+GYBMASTER="$TMPDIR/gyb-master/gyb"
+
+REMOTEBASE=https://github.com/apple/swift
+if [ $SWIFTVERMAJ -eq 5 ] && [ $SWIFTVERMIN -ge 3 ]
+then
+    REMOTE="$REMOTEBASE/raw/release/$SWIFTVER/utils/gyb.py"
+else
+    REMOTE="$REMOTEBASE/raw/swift-$SWIFTVER-branch/utils/gyb.py"
+fi
+REMOTEFALLBACK="$REMOTEBASE/raw/master/utils/gyb.py"
 
 if [ ! -x "$GYB" ]
 then
     mkdir -p "$(dirname $GYB)"
-    curl -Lo "$GYB" "$REMOTE" 2>/dev/null
+    curl -Lfo "$GYB" "$REMOTE" 2>/dev/null
+    if [ $? -ne 0 ]
+    then
+        curl -Lo "$GYBMASTER" "$REMOTEFALLBACK" 2>/dev/null
+    fi
     if [ -f "$GYB" ]
     then
         chmod +x "$GYB"
         NEWGYB="$GYB"
+    elif [ -f "$GYBMASTER" ]
+    then
+        chmod +x "$GYBMASTER"
+        NEWGYB="$GYBMASTER"
     else
         exit 1
     fi
